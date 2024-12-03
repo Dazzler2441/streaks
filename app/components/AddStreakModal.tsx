@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { EmojiPicker } from './EmojiPicker';
-import { NewStreak } from '../types/streak';
+import { NewStreak, StreakCategory } from '../types/streak';
 import { playSound } from '../utils/sounds';
 
 interface AddStreakModalProps {
@@ -13,6 +13,7 @@ interface AddStreakModalProps {
 export const AddStreakModal = ({ isOpen, onClose, onAdd }: AddStreakModalProps) => {
   const [name, setName] = useState('');
   const [selectedEmoji, setSelectedEmoji] = useState('✨');
+  const [category, setCategory] = useState<StreakCategory>('Other');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,12 +23,14 @@ export const AddStreakModal = ({ isOpen, onClose, onAdd }: AddStreakModalProps) 
       name: name.trim(),
       description: '',
       emoji: selectedEmoji,
+      category: category,
     };
 
     playSound('add');
     onAdd(newStreak);
     setName('');
     setSelectedEmoji('✨');
+    setCategory('Other');
     onClose();
   };
 

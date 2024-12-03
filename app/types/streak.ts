@@ -8,18 +8,17 @@ export interface Streak {
   currentStreak: number;
   longestStreak: number;
   category: StreakCategory;
-  tags?: string[];
   history: StreakEntry[];
 }
 
-export type NewStreak = Omit<Streak, 'id' | 'startDate' | 'lastChecked' | 'currentStreak' | 'longestStreak'>;
-
-export type StreakStatus = 'active' | 'at-risk' | 'broken';
-
 export type StreakCategory = 'Health' | 'Productivity' | 'Learning' | 'Lifestyle' | 'Other';
 
-interface StreakEntry {
+export interface StreakEntry {
   date: string;
   status: 'completed' | 'failed' | 'skipped';
   note?: string;
-} 
+}
+
+export type NewStreak = Pick<Streak, 'name' | 'description' | 'emoji' | 'category'>;
+
+export type StreakStatus = 'active' | 'at-risk' | 'broken'; 
