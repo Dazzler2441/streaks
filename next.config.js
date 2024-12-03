@@ -1,11 +1,10 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  webpack: (config) => {
-    config.infrastructureLogging = {
-      level: 'error',
-    };
-    return config;
-  },
-}
+import withPWA from 'next-pwa';
 
-module.exports = nextConfig 
+/** @type {import('next').NextConfig} */
+const config = withPWA({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+});
+
+export default config; 

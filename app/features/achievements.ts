@@ -1,3 +1,5 @@
+import { Streak } from '../types/streak';
+
 interface Achievement {
   id: string;
   name: string;
@@ -7,7 +9,7 @@ interface Achievement {
   unlockedAt?: string;
 }
 
-const achievements: Achievement[] = [
+export const achievements: Achievement[] = [
   {
     id: 'first-week',
     name: 'First Week Complete',
@@ -16,4 +18,8 @@ const achievements: Achievement[] = [
     condition: (streak) => streak.currentStreak >= 7
   },
   // More achievements...
-]; 
+];
+
+export const checkAchievements = (streak: Streak): Achievement[] => {
+  return achievements.filter(achievement => achievement.condition(streak));
+}; 

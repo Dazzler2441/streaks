@@ -25,10 +25,6 @@ export const MilestoneCelebration = ({ milestone, onClose }: MilestoneCelebratio
     const duration = 3000;
     const animationEnd = Date.now() + duration;
 
-    const randomInRange = (min: number, max: number) => {
-      return Math.random() * (max - min) + min;
-    };
-
     const interval = setInterval(() => {
       const timeLeft = animationEnd - Date.now();
 

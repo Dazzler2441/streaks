@@ -28,7 +28,6 @@ export const useStreaks = () => {
     try {
       const savedStreaks = localStorage.getItem(STORAGE_KEY);
       if (savedStreaks) {
-        // Load and immediately update all streaks
         const loadedStreaks = JSON.parse(savedStreaks);
         setStreaks(loadedStreaks.map((streak: Streak) => updateStreakStatus(streak)));
       }
@@ -41,24 +40,20 @@ export const useStreaks = () => {
 
   // Set up periodic updates
   useEffect(() => {
-    // Update streaks when tab becomes visible
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
         updateAllStreaks();
       }
     };
 
-    // Update streaks periodically
     const intervalId = setInterval(updateAllStreaks, UPDATE_INTERVAL);
-    
-    // Set up visibility change listener
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
       clearInterval(intervalId);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, []);
+  }, [updateAllStreaks]);
 
   // Save streaks to localStorage whenever they change
   useEffect(() => {
